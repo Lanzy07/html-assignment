@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Location</title>
+  <link rel="stylesheet" href="base.css" />
+  <script src="shared.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Find My Location</h1>
+    <p>Click the button below to get your current location:</p>
+
+    <button id="locateBtn">Get My Location</button>
+    <div id="result"></div>
+
+    <button onclick="goBack()">Back</button>
+  </main>
+
+  <script>
+    document.getElementById("locateBtn").addEventListener("click", function() {
+      const resultDiv = document.getElementById("result");
+
+      if (!navigator.geolocation) {
+        resultDiv.textContent = "❌ Geolocation is not supported by your browser.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          resultDiv.innerHTML = `
+            ✅ Latitude: ${lat.toFixed(6)} <br>
+            ✅ Longitude: ${lon.toFixed(6)} <br>
+            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">
+              View on Google Maps
+            </a>
+          `;
+          resultDiv.style.color = "#0078d7";
+        },
+        function(error) {
+          resultDiv.textContent = "⚠️ Unable to retrieve your location.";
+          resultDiv.style.color = "red";
+        }
+      );
+    });
+  </script>
+</body>
+</html>

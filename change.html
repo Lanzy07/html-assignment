@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+  <link rel="stylesheet" href="base.css" />
+  <script src="shared.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Currency Converter</h1>
+    <p>Convert USD to MMK</p>
+
+    <input 
+      type="number" 
+      id="usd" 
+      placeholder="Enter USD amount" 
+      min="1" 
+      required 
+    />
+    <button id="convertBtn">Convert</button>
+
+    <div id="result"></div>
+
+    <button onclick="goBack()">Back</button>
+  </main>
+
+  <script>
+    document.getElementById("convertBtn").addEventListener("click", function () {
+      const usdInput = document.getElementById("usd");
+      const resultDiv = document.getElementById("result");
+
+      const usd = parseFloat(usdInput.value);
+
+      if (isNaN(usd) || usd <= 0) {
+        resultDiv.textContent = "⚠️ Please enter a valid amount greater than 0.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      const exchangeRate = 2100; // Example: 1 USD = 2100 MMK
+      const mmk = usd * exchangeRate;
+
+      resultDiv.textContent = `✅ ${usd} USD = ${mmk.toLocaleString()} MMK`;
+      resultDiv.style.color = "#0078d7";
+    });
+  </script>
+</body>
+</html>
