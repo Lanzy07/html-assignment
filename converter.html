@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    select, input, button {
+      margin: 8px;
+      padding: 6px;
+      font-size: 16px;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Unit Converter</h2>
+
+  <label>Value: </label>
+  <input type="number" id="value" step="any">
+  
+  <label>From: </label>
+  <select id="unit">
+    <option value="m">Meters</option>
+    <option value="km">Kilometers</option>
+    <option value="kg">Kilograms</option>
+    <option value="lb">Pounds</option>
+    <option value="C">Celsius</option>
+    <option value="F">Fahrenheit</option>
+  </select>
+
+  <button onclick="convert()">Convert</button>
+  <button onclick="goBack()">Back</button>
+
+  <p id="error" class="error"></p>
+  <p id="result"></p>
+
+  <script>
+    function convert() {
+      const value = document.getElementById("value").value;
+      const unit = document.getElementById("unit").value;
+      const error = document.getElementById("error");
+      const result = document.getElementById("result");
+
+      error.textContent = "";
+      result.textContent = "";
+
+      // Validation
+      if (value === "" || isNaN(value)) {
+        error.textContent = "Please enter a valid number.";
+        return;
+      }
+
+      const num = parseFloat(value);
+
+      // Conversion logic
+      switch(unit) {
+        case "m":
+          result.textContent = `${num} meters = ${num / 1000} kilometers`;
+          break;
+        case "km":
+          result.textContent = `${num} kilometers = ${num * 1000} meters`;
+          break;
+        case "kg":
+          result.textContent = `${num} kg = ${(num * 2.20462).toFixed(2)} pounds`;
+          break;
+        case "lb":
+          result.textContent = `${num} pounds = ${(num / 2.20462).toFixed(2)} kg`;
+          break;
+        case "C":
+          result.textContent = `${num}°C = ${(num * 9/5 + 32).toFixed(2)}°F`;
+          break;
+        case "F":
+          result.textContent = `${num}°F = ${((num - 32) * 5/9).toFixed(2)}°C`;
+          break;
+        default:
+          error.textContent = "Invalid unit.";
+      }
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
