@@ -7,8 +7,9 @@ This repository contains my HTML homework:
 - Change Calculator (`change.html`)
 - Geolocation (`geolocation.html`)
 
-Open the website here:
-`https://Lanzy07.github.io/html-assignment/`
+Open the Website here
+https://Lanzy07.github.io/html-assignment/
 
-Open the apk here:
-`https://Lanzy07.github.io/html-assignment/Lanzy.apk`
+Open the apk here
+
+https://Lanzy07.github.io/html-assignment/Lanzy.apk
